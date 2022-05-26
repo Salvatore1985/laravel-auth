@@ -20,6 +20,19 @@
             <div class="col-12 mt-2">
                 {{ $post->content }}
             </div>
+            <div class="col-12 mt-2">
+                <h2>Post dello stesso autore</h2>
+                @foreach ($post->user->posts as $key => $post)
+                    <h5>Post numero: {{ $key + 1 }} -
+                        <a class="text-decoration-none"
+                            href="{{ route('admin.posts.show', $post) }}">{{ $post->title }}</a>
+                        - fatto il {{ $post->created_at }}
+                    </h5>
+                    <h5>{{ substr($post->content, 0, 50) }}...</h5>
+                    <hr>
+                @endforeach
+            </div>
         </div>
     </div>
 @endsection
+@dump($post->user->posts)
